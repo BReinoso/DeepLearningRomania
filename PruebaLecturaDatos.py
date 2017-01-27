@@ -25,7 +25,7 @@ def processFile(str):
 def normalization(x):
     norm=[]
     maximum=[]
-    minumum=[]
+    minimum=[]
     for i in range(len(x[0])):
         maximum.append(max(x[:][i]))
         minimum.append(min(x[:][i]))
@@ -51,3 +51,4 @@ if __name__ == "__main__":
         inputs.extend(temp1)
         ouputs.extend(temp2)
     inputsNorm=normalization(inputs)
+    print(inputsNorm)
