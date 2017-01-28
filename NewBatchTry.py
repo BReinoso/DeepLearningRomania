@@ -85,8 +85,13 @@ def gradient(cost,theta,alpha):
 
 
 if __name__ == "__main__":
+    name=str(time.strftime("%d_%m_%Y"))
+    time=str(time.strftime("%H:%M"))
+    f=open(LOG+name,'a')
     alpha=0.1
     num_Epochs=20
+    plotRate=1
+    f.write('Time;'+ time +';Epochs;'+str(num_Epochs)+';Alpha;'+str(alpha)+'\n')
     [inputs,outputs]=getData()
     x = T.dvector('x')
     y = T.dvector('y')
@@ -114,12 +119,17 @@ if __name__ == "__main__":
     cost_function_test=theano.function(inputs=[x,y],outputs=[cost_value])
     plt.axis([0, num_Epochs, 0, 2])
     plt.ion()
+    numHitsCont=int(num_Epochs/plotRate)
+    hitTotalTr=np.zeros(numHitsCont)
+    missTotalTr=np.zeros(numHitsCont)
+    hitTotalTe=np.zeros(numHitsCont)
+    missTotalTe=np.zeros(numHitsCont)
     for i in range(num_Epochs):
         totalCost=0
         for j in range(len(inputsTr)):
             [costIt]=cost_function(inputsTr[j],outputsTr[j])
             totalCost+=costIt
-        if num_Epochs%1==0:
+        if num_Epochs%plotRate==0:
             testCost=0
             for z in range(len(inputsTe)):
                 [temp]=cost_function_test(inputsTe[z],outputsTe[z])
@@ -127,8 +137,33 @@ if __name__ == "__main__":
             testCost/=len(inputsTe)
             plt.scatter(i, testCost,color='b')
             totalCost/=len(inputsTr)
+            f.write('Epoch;'+str(i)+';costTraining;'+str(totalCost)+';costTest;'+str(testCost)+'\n')
             plt.scatter(i, totalCost,color='r')
             plt.pause(0.05)
+            indexL=int(i/plotRate)
+            for hitTr in range(len(inputsTr)):
+                prediction=predict(inputsTr[hitTr])
+                predictionR=np.around(prediction)
+                if (predictionR==outputsTr[hitTr]).all():
+                    hitTotalTr[indexL]=hitTotalTr[indexL]+1
+                else:
+                    missTotalTr[indexL]=missTotalTr[indexL]+1
+            for hitTe in range(len(inputsTe)):
+                prediction=predict(inputsTe[hitTe])
+                predictionR=np.around(prediction)
+                if (predictionR==outputsTe[hitTe]).all():
+                    hitTotalTe[indexL]=hitTotalTe[indexL]+1
+                else:
+                    missTotalTe[indexL]=missTotalTe[indexL]+1
+    f.write('********************END********************\n')
+    f.close
+    f=open(LOG+name+'_HitsMisses','a')
+    f.write('Time;'+ time +';Epochs;'+str(num_Epochs)+';Alpha;'+str(alpha)+'\n')
+    for i in range(len(hitTotalTr)):
+        s1='Epoch;'+str(i*plotRate)
+        s2=';Hits Training;'+str(hitTotalTr[i])+';Misses Training;'+str(missTotalTr[i])
+        s3=';Hits Test;'+str(hitTotalTe[i])+';Misses Test;'+str(missTotalTe[i])+'\n'
+        f.write(s1+s2+s3)
     hits=0
     misses=0
     for i in range(len(inputsTe)):
@@ -138,9 +173,25 @@ if __name__ == "__main__":
             hits+=1
         else:
             misses+=1
-    print('Hits: '+str(hits)+' misses: '+str(misses))
+    f.write('-------------------TRAINING ENDED-------------------\n')
+    f.write('Test Hits: '+str(hits)+' Test misses: '+str(misses)+'\n')
+    print('Test Hits: '+str(hits)+' Test misses: '+str(misses))
+    hits=0
+    misses=0
+    for i in range(len(inputsTr)):
+        prediction=predict(inputsTr[i])
+        predictionR=np.around(prediction)
+        if (predictionR==outputsTr[i]).all():
+            hits+=1
+        else:
+            misses+=1
+    f.write('Training Hits: '+str(hits)+' Training misses: '+str(misses)+'\n')
+    print('Training Hits: '+str(hits)+' Training misses: '+str(misses))
+    f.write('********************END********************\n')
+    f.close
     while True:
         plt.pause(0.05)
+
 
 
 
