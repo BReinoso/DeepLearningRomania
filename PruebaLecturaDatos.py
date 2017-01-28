@@ -1,3 +1,12 @@
+import theano
+import theano.tensor as T
+import theano.tensor.nnet as nnet
+import numpy as np
+from random import shuffle
+import time
+import matplotlib.pyplot as plt
+from theano import pp
+
 CLEVELAND='processed.cleveland.data.txt'
 HUNGARIAN='processed.hungarian.data.txt'
 SWIT='processed.switzerland.data.txt'
@@ -27,8 +36,8 @@ def normalization(x):
     maximum=[]
     minimum=[]
     for i in range(len(x[0])):
-        maximum.append(max(x[:][i]))
-        minimum.append(min(x[:][i]))
+        maximum.append(max(x[:,i]))
+        minimum.append(min(x[:,i]))
     for i in x:
         temp=[]
         for j in range(len(i)):
@@ -50,5 +59,29 @@ if __name__ == "__main__":
             [temp1,temp2]=processFile(VADATA)
         inputs.extend(temp1)
         ouputs.extend(temp2)
+    inputs=np.array(inputs)
     inputsNorm=normalization(inputs)
-    print(inputsNorm)
+    w=np.array(np.random.rand(5,2), dtype=theano.config.floatX)
+    x=np.array([0,1,2,3])
+    b = np.array([1], dtype=theano.config.floatX)
+    new_x = T.concatenate([x, b])
+    print(new_x.eval())
+    print(w)
+    m = T.dot(w.T, new_x)
+    print(m.eval())
+    a=np.array([0,1])
+    b=np.array([0.3,0.8])
+    c=np.array([0.8,0.3])
+    print(a)
+    print(b)
+    print(c)
+    print(1-a)
+    print(-a*np.log(b))
+    print(-(1-a)*np.log(1-b))
+    print(-a*np.log(b)-(1-a)*np.log(1-b))
+    print(np.sum(-a*np.log(b)-(1-a)*np.log(1-b)))
+    a=[0,0,0,0]
+    a+=[1,2]
+    print(a)
+    
+    
