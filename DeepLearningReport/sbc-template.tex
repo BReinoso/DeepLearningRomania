@@ -179,10 +179,123 @@ There are three main components to be described in this section. The first one i
 
 \subsection{Architecture and tool}
 
-Firstly, we choose the Theano tool because is one of the most popular tools and is for Python which is a very malleable and easy used.
+Firstly, we choose the Theano tool because is one of the most popular tools and is for Python which is a very malleable and easy used. Also, in order to manage the arrays in a more convenient way we use Numpy for python.
+
+\subsubsection{Theano\cite{2016arXiv160502688full}}
+This tool for Python is one of the most populer ones to develop Deep Learning models. This is becaus Theano allows the user to run his code in the GPU and, also, it does a lot of compilations in C in order to achieve a better performance.
+
+Theano also has a lot of functions and funtionalities that makes easy the job of implementing Deep Learning models. Theano allow us to work with expressions and representations of values and functions. So, if we want to work with Theano we have, at least, to know that this library works in other way. We have to define variables with types of Theano and used that variables to build functions. Also we have to know how shared variables works, because we used shared values for the weights.
+
+The variables we used in our application are implementing as follows:
+\begin{lstlisting}
+    x = T.dvector('x') 
+    y = T.dvector('y') 
+    theta1 = theano.shared(np.array(np.random.rand(14,10), dtype=theano.config.floatX))
+    theta2 = theano.shared(np.array(np.random.rand(11,5), dtype=theano.config.floatX))
+    theta3 = theano.shared(np.array(np.random.rand(6,2), dtype=theano.config.floatX))
+\end{lstlisting}
+But we have to know that these variables are like the python's variables. These variables are a representation of what type of value is expected by Theano when we use the variables in the expression to define formulas, the cost function formula for example.
+\begin{lstlisting}
+	cost_value=T.sum(-y*T.log(layer3)-(1-y)*T.log(1-layer3))
+\end{lstlisting}
+This expression can be converted into a funtionc to be used in the future.
+\begin{lstlisting}
+    cost_function_test=theano.function(inputs=[x,y],outputs=[cost_value])
+\end{lstlisting}
+After implementing the function we can use it to get the cost function. We have to define the inputs using Theano variables. And the ouput can be a normal Python function or a Theano expression. Also, we can determine some updates to be done when the function is called.
+\begin{lstlisting}
+    cost_function=theano.function(inputs=[x,y],outputs=[cost_value],updates=[(theta1,gradient(cost_value,theta1,alpha)),(theta2,gradient(cost_value,theta2,alpha)),(theta3,gradient(cost_value,theta3,alpha))])    
+\end{lstlisting}
+If the update is done on variables that are not shared, then it has to be in the inputs. The ouputs are pairs with the variable to be updated and the value to update, can also be functions to calculate the new value. Now, we can use this function as a step of the train because we process one example and update the weights with the information of that example.
+
+That was the basic information we used to implement our application with the Theano tool. For more information refer to the Theano Documentation.
+\subsubsection{Architecture}
+In order to manage this problem we decided to use the well known model of Neural Network. 
+
+The Neural Network of our example has 3 layers.  The number of layers was decided for convention between the authors of the application and after testing the application with different numbers of layers and neurons. The best and most interesting results were obtained with the three layers we mentioned and with 10, 5 and 2 neurons respectively. The last layer, ouput layer, has 2 neurons, 1 neuron for each class.
+
+The activation function for the neurons is the sigmoid function. This function was decided because for classification is one of the most populars ones. This is because the sigmoid function returns a value between 0 and 1, the values we want because we are predicting probabilities. So, in the ouput layer each layer is going to predict the probability of one example to be the class that the neuron represents.
+
+For the training we decided to use the stochastic gradient descent algorithm. This algorith is described in a previous section so to know more about it see the Section PENDING.
+
+In the thery, for stochatic gradient descent we have the cost funtion described in its section, but in this case and using the theory of Neural Networks for classification we used the cost function described in the section of Neural Networks.
+
+And, the last detail to be mentioned is that we have a random values for the $\theta$ of the layers at the start of the application. This is noteworthy because one of the greatest advances in Deep Learning is the unsupervised pre-training\cite{erhan2010does,bengio2007greedy}. We decided this random initialization because we consider that the problem is not hard enough and the training examples are not enough to need this.
 
 \subsection{Dataset Used: Heart Disease Data Set \cite{Lichman:2013}}
+For this application we used a dataset with the data of the heart of some pacients and the information if they had a heart disease or not.This data was taken from four hospitals and it contains a total 76 features for each pacient, but the description said that only 14 features are used in the other works. Also, one of the dataset with 76 features is corrupted so we took the processed datasets with 14 features. \cite{heartDiseaseC,heartDiseaseZ,heartDiseaseH,heartDiseaseB}
 
+The application take the data from the datasets and storage it to be treated. We do a shuffle of all training examples to mix the pacients of all hospitals. After that we prepare the data to be processed by the neural network.
+
+Firstly, we split the data into two arrays. The first one is filled with the input examples with 13 features, and the second one is filled with the ouputs or the expected value with 1 feature. 
+
+\begin{lstlisting}
+shuffle(data) #Shuffle the data of all datasets
+for i in data:
+      inputs.append(i[:len(i)-1]) #Split the inputs
+      outputs.append(i[len(i)-1]) #Split the expected outputs
+\end{lstlisting}
+
+The data in the ouputs array should be only 0 or 1 but some examples have the values 2 and 3 also, so we took all value greater than 0 as 1.
+
+\begin{lstlisting}
+for i in range(len(x)): #For values greater than 1 in the predicted value, we asume them as 1
+        if x[i][len(x[i])-1] > 1:
+            x[i][len(x[i])-1]=1
+\end{lstlisting}
+
+Now, the process is to convert the ouputs into an array because we are gonna have 2 neurons to predict two classes. The class heart disease ($[1,0]$) and the class no heart disease ($[0,1]$).
+
+\begin{lstlisting}
+    for i in outputs:                   #Converting the outputs to be predicted by 2 neurons
+        if i==1:
+            outputsF.append([1,0])
+        else:
+            outputsF.append([0,1])
+\end{lstlisting}
+
+Secondly, is to apply a mean normalization over tha features of the inputs examples. This process is done in order to have a better update of the $\theta$ and to reduce the difference between the features. Some features have a high values and other have only values of 0 and 1. The mean normalization is done with the next formula:
+
+\begin{equation}
+   \forall x \in X, \forall f \in, x^{(f)}= \frac{x^{(f)}-min(X^{(f)})}{max(X^{(f)})-min(X^{(f)})}
+\end{equation}
+
+We have that, for each input $x$ in the set of inputs $X$,  we do the process of normalization for each feature $f$ in the $x$ example. The normalization is done with the difference between the $f$ value in the example $x$ and the minimum value over all values of the feature $f$ in the set of inputs $X$ divided by the difference between the maximum value over all values of the feature $f$ in the set of inputs $X$ and the minumum described.
+
+And lastly, the process is to divided the full dataset into two subdatasets. The first dataset is for the training process and it has the $70\%$ of all examples. The second dataset is for testing and it has the $30\%$ of all examples.
+With that process we have the data ready to be used. To end this section a list of the features used and its descriptions is going to be presented.
+\begin{enumerate} 
+	\item age: age in years 
+	\item sex: sex (1 = male; 0 = female)
+	\item cp: chest pain type 
+	\begin{enumerate} 
+		\item Value 1: typical angina 
+		\item Value 2: atypical angina 
+		\item Value 3: non-anginal pain 
+		\item Value 4: asymptomatic 
+	\end{enumerate}
+	\item trestbps: resting blood pressure (in mm Hg on admission to the hospital) 
+	\item chol: serum cholestoral in mg/dl 
+	\item fbs: (fasting blood sugar > 120 mg/dl) (1 = true; 0 = false) 
+	\item restecg: resting electrocardiographic results 
+	\begin{enumerate} 
+		\item Value 0: normal 
+		\item Value 1: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)  
+		\item Value 2: showing probable or definite left ventricular hypertrophy by Estes' criteria 
+	\end{enumerate}
+	\item thalach: maximum heart rate achieved 
+	\item exang: exercise induced angina (1 = yes; 0 = no)
+	\item oldpeak = ST depression induced by exercise relative to rest 
+	\item slope: the slope of the peak exercise ST segment 
+	\begin{enumerate} 
+		\item Value 1: upsloping 
+		\item Value 2: flat   
+		\item Value 3: downsloping 
+	\end{enumerate}
+	\item ca: number of major vessels (0-3) colored by flourosopy
+	\item thal: 3 = normal; 6 = fixed defect; 7 = reversable defect
+	\item num: diagnosis of heart disease (angiographic disease status)
+\end{enumerate}
 \subsection{Results}
 
 \section{Conclusion}
