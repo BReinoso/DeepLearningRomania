@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 DATASETS=['processed.cleveland.data.txt','processed.hungarian.data.txt',
           'processed.switzerland.data.txt','processed.va.data.txt']
 LOG='./LOG/'
+PLOT='./PLOT/'
 
 #Description: Method that applies mean normalization on the features of all examples in
 #             in the input.
@@ -111,7 +112,7 @@ def gradient(cost,theta,alpha):
 #   Here the training and other process are done.
 if __name__ == "__main__":
     name=str(time.strftime("%d_%m_%Y")) #Log file name
-    time=str(time.strftime("%H:%M"))    #Strat time for execution
+    time=str(time.strftime("%H_%M"))    #Strat time for execution
     f=open(LOG+name,'a')                #Open and create if its neccessary the log file
     alpha=0.1                           #Learning Rate
     num_Epochs=20                       #Number of Epochs for the training
@@ -151,9 +152,21 @@ if __name__ == "__main__":
     cost_function=theano.function(inputs=[x,y],outputs=[cost_value],updates=[(theta1,gradient(cost_value,theta1,alpha)),(theta2,gradient(cost_value,theta2,alpha)),(theta3,gradient(cost_value,theta3,alpha))])
     #Implementing the cost function to test. No theta update
     cost_function_test=theano.function(inputs=[x,y],outputs=[cost_value])
-    #Defining the windoe to plot
-    plt.axis([0, num_Epochs, 0, 2])
-    plt.ion()
+    #Defining the plots
+    fig=plt.figure()
+    ax1=fig.add_subplot(311)
+    ax1.set_title("Cost of all examples")
+    ax1.set_ylabel("Cost value")
+    ax1.set_xlabel("Epoch")
+    ax3=fig.add_subplot(312)
+    ax3.set_title("Hits/Misses Training Set per Epoch")
+    ax3.set_ylabel("% Hits/Misses")
+    ax3.set_xlabel("Epoch")
+    ax4=fig.add_subplot(313)
+    ax4.set_title("Hits/Misses Test Set per Epoch")
+    ax4.set_ylabel("% Hits/Misses")
+    ax4.set_xlabel("Epoch")
+    plt.tight_layout()# Moving the graphs
     #Creating variables to store the data of the hits and misses in the epochs ->num_Epochs%plotRate==0
     numHitsCont=int(num_Epochs/plotRate)
     hitTotalTr=np.zeros(numHitsCont)
@@ -172,10 +185,10 @@ if __name__ == "__main__":
                 [temp]=cost_function_test(inputsTe[z],outputsTe[z])
                 testCost+=temp
             testCost/=len(inputsTe)             #Test cost function
-            plt.scatter(i, testCost,color='b')  #Plot test cost
+            ax1.scatter(i, testCost,color='b')  #Plot test cost
             totalCost/=len(inputsTr)            #Training cost function
             f.write('Epoch;'+str(i)+';costTraining;'+str(totalCost)+';costTest;'+str(testCost)+'\n') #Writting the data on log file
-            plt.scatter(i, totalCost,color='r') #Plot training cost
+            ax1.scatter(i, totalCost,color='r') #Plot training cost
             plt.pause(0.05)                     #Plot pause to print
             indexL=int(i/plotRate)              #Index for the hits and misses to be stored
             for hitTr in range(len(inputsTr)):  #Storing the hits and misses of training set in the current epoch
@@ -185,6 +198,11 @@ if __name__ == "__main__":
                     hitTotalTr[indexL]=hitTotalTr[indexL]+1
                 else:
                     missTotalTr[indexL]=missTotalTr[indexL]+1
+            percentHitTr=hitTotalTr[indexL]/len(inputsTr)
+            #Plot for the second graph
+            ax3.scatter(i,percentHitTr,c='g')
+            percentMissTr=missTotalTr[indexL]/len(inputsTr)
+            ax3.scatter(i,percentMissTr,c='r')
             for hitTe in range(len(inputsTe)):  #Storing the hits and misses of test set in the current epoch
                 prediction=predict(inputsTe[hitTe])
                 predictionR=np.around(prediction)
@@ -192,6 +210,11 @@ if __name__ == "__main__":
                     hitTotalTe[indexL]=hitTotalTe[indexL]+1
                 else:
                     missTotalTe[indexL]=missTotalTe[indexL]+1
+            #Plot for the third graph
+            percentHitTe=hitTotalTe[indexL]/len(inputsTe)
+            ax4.scatter(i,percentHitTe,c='g')
+            percentMissTe=missTotalTe[indexL]/len(inputsTe)
+            ax4.scatter(i,percentMissTe,c='r')
     f.write('********************END********************\n') #Printing end in log file
     f.close                                     #close log file
     f=open(LOG+name+'_HitsMisses','a')          #Open or create of log file for hits and misses
@@ -234,8 +257,13 @@ if __name__ == "__main__":
     f.write('********************END********************\n') #End of log
     f.close #Close of log
     #Mantaining the plot
+    plt.savefig(PLOT+'Plot_'+name+'_'+time+'.png') #Saving the graphs as a png image
     while True:
-        plt.pause(0.05)
+        try:
+            plt.pause(0.05)
+        except KeyboardInterrupt: #Capturing the exception to close the program
+            break
+
 
 
 
