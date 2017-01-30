@@ -1,0 +1,175 @@
+Time;03_42;Epochs;20;Alpha;0.1
+Epoch;0;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;1;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;2;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;3;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;4;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;5;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;6;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;7;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;8;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;9;Hits Training;296.0;Misses Training;348.0;Hits Test;115.0;Misses Test;161.0
+Epoch;10;Hits Training;386.0;Misses Training;258.0;Hits Test;161.0;Misses Test;115.0
+Epoch;11;Hits Training;447.0;Misses Training;197.0;Hits Test;198.0;Misses Test;78.0
+Epoch;12;Hits Training;450.0;Misses Training;194.0;Hits Test;201.0;Misses Test;75.0
+Epoch;13;Hits Training;471.0;Misses Training;173.0;Hits Test;209.0;Misses Test;67.0
+Epoch;14;Hits Training;510.0;Misses Training;134.0;Hits Test;218.0;Misses Test;58.0
+Epoch;15;Hits Training;517.0;Misses Training;127.0;Hits Test;220.0;Misses Test;56.0
+Epoch;16;Hits Training;515.0;Misses Training;129.0;Hits Test;217.0;Misses Test;59.0
+Epoch;17;Hits Training;513.0;Misses Training;131.0;Hits Test;217.0;Misses Test;59.0
+Epoch;18;Hits Training;517.0;Misses Training;127.0;Hits Test;217.0;Misses Test;59.0
+Epoch;19;Hits Training;517.0;Misses Training;127.0;Hits Test;217.0;Misses Test;59.0
+-------------------TRAINING ENDED-------------------
+Test Hits: 217 Test misses: 59
+Training Hits: 517 Training misses: 127
+********************END********************
+Time;03_43;Epochs;20;Alpha;0.1
+Epoch;0;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;1;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;2;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;3;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;4;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;5;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;6;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;7;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;8;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;9;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;10;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;11;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;12;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;13;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;14;Hits Training;356.0;Misses Training;288.0;Hits Test;153.0;Misses Test;123.0
+Epoch;15;Hits Training;395.0;Misses Training;249.0;Hits Test;164.0;Misses Test;112.0
+Epoch;16;Hits Training;516.0;Misses Training;128.0;Hits Test;217.0;Misses Test;59.0
+Epoch;17;Hits Training;521.0;Misses Training;123.0;Hits Test;224.0;Misses Test;52.0
+Epoch;18;Hits Training;523.0;Misses Training;121.0;Hits Test;224.0;Misses Test;52.0
+Epoch;19;Hits Training;520.0;Misses Training;124.0;Hits Test;225.0;Misses Test;51.0
+-------------------TRAINING ENDED-------------------
+Test Hits: 225 Test misses: 51
+Training Hits: 520 Training misses: 124
+********************END********************
+Time;03_43;Epochs;20;Alpha;0.1
+Epoch;0;Hits Training;366.0;Misses Training;278.0;Hits Test;143.0;Misses Test;133.0
+Epoch;1;Hits Training;366.0;Misses Training;278.0;Hits Test;143.0;Misses Test;133.0
+Epoch;2;Hits Training;366.0;Misses Training;278.0;Hits Test;143.0;Misses Test;133.0
+Epoch;3;Hits Training;366.0;Misses Training;278.0;Hits Test;143.0;Misses Test;133.0
+Epoch;4;Hits Training;366.0;Misses Training;278.0;Hits Test;143.0;Misses Test;133.0
+Epoch;5;Hits Training;366.0;Misses Training;278.0;Hits Test;143.0;Misses Test;133.0
+Epoch;6;Hits Training;366.0;Misses Training;278.0;Hits Test;143.0;Misses Test;133.0
+Epoch;7;Hits Training;477.0;Misses Training;167.0;Hits Test;198.0;Misses Test;78.0
+Epoch;8;Hits Training;496.0;Misses Training;148.0;Hits Test;213.0;Misses Test;63.0
+Epoch;9;Hits Training;524.0;Misses Training;120.0;Hits Test;220.0;Misses Test;56.0
+Epoch;10;Hits Training;523.0;Misses Training;121.0;Hits Test;223.0;Misses Test;53.0
+Epoch;11;Hits Training;526.0;Misses Training;118.0;Hits Test;225.0;Misses Test;51.0
+Epoch;12;Hits Training;525.0;Misses Training;119.0;Hits Test;226.0;Misses Test;50.0
+Epoch;13;Hits Training;523.0;Misses Training;121.0;Hits Test;227.0;Misses Test;49.0
+Epoch;14;Hits Training;525.0;Misses Training;119.0;Hits Test;227.0;Misses Test;49.0
+Epoch;15;Hits Training;527.0;Misses Training;117.0;Hits Test;226.0;Misses Test;50.0
+Epoch;16;Hits Training;527.0;Misses Training;117.0;Hits Test;226.0;Misses Test;50.0
+Epoch;17;Hits Training;530.0;Misses Training;114.0;Hits Test;226.0;Misses Test;50.0
+Epoch;18;Hits Training;530.0;Misses Training;114.0;Hits Test;226.0;Misses Test;50.0
+Epoch;19;Hits Training;531.0;Misses Training;113.0;Hits Test;226.0;Misses Test;50.0
+-------------------TRAINING ENDED-------------------
+Test Hits: 226 Test misses: 50
+Training Hits: 531 Training misses: 113
+********************END********************
+Time;03_43;Epochs;20;Alpha;0.1
+Epoch;0;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;1;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;2;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;3;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;4;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;5;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;6;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;7;Hits Training;355.0;Misses Training;289.0;Hits Test;154.0;Misses Test;122.0
+Epoch;8;Hits Training;478.0;Misses Training;166.0;Hits Test;202.0;Misses Test;74.0
+Epoch;9;Hits Training;508.0;Misses Training;136.0;Hits Test;214.0;Misses Test;62.0
+Epoch;10;Hits Training;531.0;Misses Training;113.0;Hits Test;219.0;Misses Test;57.0
+Epoch;11;Hits Training;531.0;Misses Training;113.0;Hits Test;218.0;Misses Test;58.0
+Epoch;12;Hits Training;531.0;Misses Training;113.0;Hits Test;221.0;Misses Test;55.0
+Epoch;13;Hits Training;528.0;Misses Training;116.0;Hits Test;220.0;Misses Test;56.0
+Epoch;14;Hits Training;532.0;Misses Training;112.0;Hits Test;219.0;Misses Test;57.0
+Epoch;15;Hits Training;534.0;Misses Training;110.0;Hits Test;219.0;Misses Test;57.0
+Epoch;16;Hits Training;534.0;Misses Training;110.0;Hits Test;218.0;Misses Test;58.0
+Epoch;17;Hits Training;534.0;Misses Training;110.0;Hits Test;219.0;Misses Test;57.0
+Epoch;18;Hits Training;534.0;Misses Training;110.0;Hits Test;214.0;Misses Test;62.0
+Epoch;19;Hits Training;533.0;Misses Training;111.0;Hits Test;212.0;Misses Test;64.0
+-------------------TRAINING ENDED-------------------
+Test Hits: 212 Test misses: 64
+Training Hits: 533 Training misses: 111
+********************END********************
+Time;03_44;Epochs;20;Alpha;0.1
+Epoch;0;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;1;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;2;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;3;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;4;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;5;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;6;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;7;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;8;Hits Training;359.0;Misses Training;285.0;Hits Test;150.0;Misses Test;126.0
+Epoch;9;Hits Training;500.0;Misses Training;144.0;Hits Test;218.0;Misses Test;58.0
+Epoch;10;Hits Training;516.0;Misses Training;128.0;Hits Test;229.0;Misses Test;47.0
+Epoch;11;Hits Training;520.0;Misses Training;124.0;Hits Test;226.0;Misses Test;50.0
+Epoch;12;Hits Training;515.0;Misses Training;129.0;Hits Test;229.0;Misses Test;47.0
+Epoch;13;Hits Training;512.0;Misses Training;132.0;Hits Test;228.0;Misses Test;48.0
+Epoch;14;Hits Training;515.0;Misses Training;129.0;Hits Test;229.0;Misses Test;47.0
+Epoch;15;Hits Training;513.0;Misses Training;131.0;Hits Test;230.0;Misses Test;46.0
+Epoch;16;Hits Training;511.0;Misses Training;133.0;Hits Test;228.0;Misses Test;48.0
+Epoch;17;Hits Training;510.0;Misses Training;134.0;Hits Test;228.0;Misses Test;48.0
+Epoch;18;Hits Training;506.0;Misses Training;138.0;Hits Test;223.0;Misses Test;53.0
+Epoch;19;Hits Training;503.0;Misses Training;141.0;Hits Test;218.0;Misses Test;58.0
+-------------------TRAINING ENDED-------------------
+Test Hits: 218 Test misses: 58
+Training Hits: 503 Training misses: 141
+********************END********************
+Time;03_44;Epochs;20;Alpha;0.1
+Epoch;0;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;1;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;2;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;3;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;4;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;5;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;6;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;7;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;8;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;9;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;10;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;11;Hits Training;363.0;Misses Training;281.0;Hits Test;146.0;Misses Test;130.0
+Epoch;12;Hits Training;513.0;Misses Training;131.0;Hits Test;218.0;Misses Test;58.0
+Epoch;13;Hits Training;519.0;Misses Training;125.0;Hits Test;220.0;Misses Test;56.0
+Epoch;14;Hits Training;523.0;Misses Training;121.0;Hits Test;222.0;Misses Test;54.0
+Epoch;15;Hits Training;522.0;Misses Training;122.0;Hits Test;223.0;Misses Test;53.0
+Epoch;16;Hits Training;525.0;Misses Training;119.0;Hits Test;226.0;Misses Test;50.0
+Epoch;17;Hits Training;529.0;Misses Training;115.0;Hits Test;227.0;Misses Test;49.0
+Epoch;18;Hits Training;527.0;Misses Training;117.0;Hits Test;228.0;Misses Test;48.0
+Epoch;19;Hits Training;527.0;Misses Training;117.0;Hits Test;228.0;Misses Test;48.0
+-------------------TRAINING ENDED-------------------
+Test Hits: 228 Test misses: 48
+Training Hits: 527 Training misses: 117
+********************END********************
+Time;03_46;Epochs;20;Alpha;0.1
+Epoch;0;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;1;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;2;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;3;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;4;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;5;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;6;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;7;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;8;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;9;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;10;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;11;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;12;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;13;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;14;Hits Training;352.0;Misses Training;292.0;Hits Test;157.0;Misses Test;119.0
+Epoch;15;Hits Training;454.0;Misses Training;190.0;Hits Test;197.0;Misses Test;79.0
+Epoch;16;Hits Training;509.0;Misses Training;135.0;Hits Test;224.0;Misses Test;52.0
+Epoch;17;Hits Training;512.0;Misses Training;132.0;Hits Test;228.0;Misses Test;48.0
+Epoch;18;Hits Training;513.0;Misses Training;131.0;Hits Test;232.0;Misses Test;44.0
+Epoch;19;Hits Training;516.0;Misses Training;128.0;Hits Test;230.0;Misses Test;46.0
+-------------------TRAINING ENDED-------------------
+Test Hits: 230 Test misses: 46
+Training Hits: 516 Training misses: 128
+********************END********************
