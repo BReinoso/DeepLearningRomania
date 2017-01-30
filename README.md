@@ -12,7 +12,7 @@ The model is a simple Neural Network with 3 layers. The first one with 10 neuron
 
 The update of the Thetas is doing like in Stochastic Gradient Descent, we made an update with each exmple. Because we are using the sigmoid function and we expect values 0 or 1, the cost function is calculated with the same formula that is used in Logistic Regression.
 # Results
-The training is done very quickly, from 8 to 20 Epochs. The better succes rate obtained with the architecture was 83% of hit rate in the test set.
+The training is done very quickly, from 8 to 20 Epochs. The best succes rate obtained with the architecture was 83% of hit rate in the test set.
 
 That's all. I'll be adding more information and, probably, more implementations.
 Greetings.
