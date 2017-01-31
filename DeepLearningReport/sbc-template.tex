@@ -80,7 +80,7 @@ Neural Networks are composed of artificial neurons, which have an activation fun
 \label{fig:figure1}
 \end{figure}
 
-Knowing how artificial neurons works, we have to know how this neurons are organized inside the neural network. The neural network architecture is divided in, at least, two layers. One layer is called input layer, and the other one is called ouput layer. And, between this two layers, we can add one or more hidden layers. Of course we have to hae in mind that the bigger the numer of layers is, the more calculations and training complexity we have. We can se an example of a neural network with multiple layers in Figure \ref{fig:figure2}. Also, we have to think of the possibilitie of concatenate neural networks in order to solve more difficult problems or to build a better pipeline for the problem.
+Knowing how artificial neurons works, we have to know how this neurons are organized inside the neural network. The neural network architecture is divided in, at least, two layers. One layer is called input layer, and the other one is called ouput layer. And, between this two layers, we can add one or more hidden layers. Of course we have to hae in mind that the bigger the numer of layers is, the more calculations and training complexity we have. We can se an example of a neural network with multiple layers in Figure \ref{fig:figure2}. Also, we have to think of the possibility of concatenate neural networks in order to solve more difficult problems or to build a better pipeline for the problem.
 
 \begin{figure}[ht]
 \centering
@@ -193,7 +193,7 @@ Lastly, is worth to metion that the principle of greedy layer-wise unsupervised 
 \item Repeat the steps 2 and 3 until we have trained all of our layers.
 \item Do a fine-tunning to the architecture. This tunning can be done with a normal supervised trainning used in the application of this work (Section \ref{sec:Architecture}) for example.
 \end{enumerate}
-That is the definition of the DBNs architecture. As you can see it is a composition of a RBM and a Multilayer Neural Network.
+That is the definition of DBN which is a composition of a RBM and a multilayer neural network.
 \subsection{Other honorable mentions}
 After the presentation of Boltzmann Machines and Neural Networks, I think is interesting to present another three algorithms that are also powerful and could be used to solve complex problems.
 
@@ -224,6 +224,7 @@ Secondly, the hypotesis that is only a equation for a line but with the $\theta$
 And this is Linear Regression algorithm which consist in draw the straight line through the training examples that minimize the cost function. Now, to obtain the best value $\theta$ for the problem, we have to use another algorithm and the most popular is Gradient Descent. And, in particular, we are going to present Batch Gradien Descent (see Section \ref{sec:Gradient}).
 
 \subsubsection{Logistic Regression}
+\label{sec:Logisic}
 Logistic Regression has almost the same intuition as Linear Regression but in this case we are not trying to draw a straight line but a curve (See Figure \ref{fig:figure4}).
 \begin{figure}[ht]
 \centering
@@ -305,9 +306,68 @@ There is at least another version of Gradien Descent, but since it is not used i
 \section{Model used in the application: Neural Networks}
 Detailed presentation about Neural Networks. In this section I am going to writte the formulas and the meaning behind the basic Neural Networks. Also, the explanation of the vectorial implementation of the Neural Network is going to be explained because it is used in the application.
 
+Firstly, we know that the minimum entity in a Neural Network is the neuron which has a set of weights depending on its inputs and an activation function. So we can say that, if we represent the activation function as $f$, the input as $x$ and the weights as $w$, the output of the nuerons is:
+\begin{equation}
+\textrm{output}(X,W)=f(\displaystyle\sum_{i}^{x}w^{(i)}x^{(i)})
+\end{equation}
+And, as we can see, we have that the input is a vector like $X=[x^{(0)},x^{(1)}...x^{(n)}$ and the weights is another vector of the same size like $W=[w^{(0)},w^{(1)}...w^{(n)}$. With this representation we can comprobate that we can do a vectorial implementation of this:
+\begin{equation}
+\textrm{output}(X,W)=f(W^{T}X)
+\end{equation}
+If we do that multiplication between $W^{T}$ and $X$ we have that now the $X$ is still a column vector and the $W$ is now a row vector, so, the result of the multiplication is going to be $W^{T}X = w^{(0)}x^{(0)}+w^{(1)}x^{(1)}+...+w^{(n)}x^{(n)}$ which is the same result as the non vectorial definition of the equation.
+
+With this, we arrive at the representation of a layer. The representation of a layer is a group a of $m$ each with $n$ inputs that is the leng of the vector $X$ plus one because we have to add the bias. We saw that we can representate the weight of one neuron with a colum vector with $nX1$ dimension. So, we can representate the weights of one layer with a matrix with $nXm$ dimentions. If we have that $N$ represents the neurons and $L$ the current layer:
+\begin{equation}
+W_{(X)}^{(L)}= \theta_{(X)}^{(L)} = \bordermatrix{~ & N^{(1)} & N^{(2)} & \textrm{...} & N^{(m)} \cr X^{(1)} & w_{(1)}^{(1)} & w_{(2)}^{(1)}&\textrm{...}&w_{(1)}^{(m)} \cr X^{(2)} & w_{(2)}^{(1)} & w_{(2)}^{(2)}&\textrm{...}&w_{(2)}^{(m)} \cr \textrm{...} & \textrm{...} & \textrm{...} &\textrm{...}&. \cr X^{(n)}&w_{(n)}^{(1)}&w_{(n)}^{(2)}&\textrm{...}&w_{(n)}^{(m)}\cr}
+\end{equation}
+ So, now we have a matrix representing the layer with $m$ columns that is the number of neurons of that layer. So we still have the same formula to calculate the ouput of the layer. Because, when we transpose $W$ we have one row for each neuron, this implies that, when we do the multiplication betweent $W^T$ and $X$, we will obtain a colum vector with $mX1$ dimentions. This means that we are going to return the ouput of each layer in one row. If we apply the same theory when we had only one neuron, we will se that this matrix multiplication is exactly the same as what we do with the non vectorial implementation. But the vectorial implementation tends to have better performance.
+ 
+ Therefore,we will have an iinput layer with the size of $X$ (represented with $n$) plus the bias, so the size is $n + 1$. This means that the first layer, with $m$ neurons, is going to be a matrix of $n+1Xm$ dimentions. Then, the next layer, with $m1$ neurons, is going to be a matrix of $m+1Xm1$ dimentions. And so on. Having that each output of each layer is goint to be the input to the next layer o the preicte value (see Figure \ref{fig:Multilayer}).
+ 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.4\textwidth]{Multilayer.png}
+\caption{Multilayer neural network}
+\label{fig:Multilayer}
+\end{figure}
+
+Now, the $f$ activation function of the neurons, whe we are talking of a clasification problem, is normally the sigmoid function. This is because we are going to predict a probability betwee 0 and 1, both included, of one input to be of one class and the sigmoid function image has only that values. 
+
+\begin{equation}
+\textrm{sigmoid}(z)=g(z)=\frac{1}{1+e^{-z}}
+\end{equation}
+
+And its gradient cand be calculated with:
+
+\begin{equation}
+g'(z)=\frac{\partial}{\partial z}g(z)=g(z)(1-g(z))
+\end{equation}
+
+As we can see, the gradient is very easy to calculate which converts this activation function into a very convenient one.
+
+In Neural Networks for classification we have that the cost function is the same as Logistic Regression (Section \ref{sec:Logistic}):
+\begin{equation}
+  J(\theta)=\frac{1}{m} \displaystyle\sum_{i=1}^{m} [-y^{(i)}\log(h_{\theta}(x^{(i)}))-(1-y^{(i)})\log(1 -h_{\theta}(x^{(i)}))]
+\end{equation}
+In order to control the learning rate and the process of learning exist a term knowing as regularization. In rest of the algorithms also exist this term but it was not described in this paper. But, in this section it is going to be described. In order to add the regularization we have a new variable $\lambda$ (lambda) which is the term to control the amoun of effect the regularization has over the cost function. And the regularization term is the sum of the squares of the $\theta$ values of every layer.
+\begin{equation}
+  \textrm{regularization}=\frac{\lambda}{2m} [\displaystyle\sum_{i=1}^{L}\displaystyle\sum_{j=1}^{N}\displaystyle\sum_{k=1}^{X} (\theta_{j,k}^{(i)})^2]
+\end{equation}
+In the equation above we have that $m$ is the number of input examples for the training. And that ther is not more than the process of sum all squares of the $\theta$ values from all layers. So, the regularized cost function is:
+\begin{equation}
+  J(\theta)=\frac{1}{m} \displaystyle\sum_{i=1}^{m} [-y^{(i)}\log(h_{\theta}(x^{(i)}))-(1-y^{(i)})\log(1 -h_{\theta}(x^{(i)}))] +\frac{\lambda}{2m} [\displaystyle\sum_{i=1}^{L}\displaystyle\sum_{j=1}^{N}\displaystyle\sum_{k=1}^{X} (\theta_{j,k}^{(i)})^2]
+\end{equation}
+In our application we did not use the regularized cost function, only the cost function. But this is not dificult to implement despite of to seem very dificult in the formula representation. The implementation in Theano for the cost function of our application (Section \ref{sec:Architecture}) would be:
+\begin{lstlisting}
+	cost_value=T.sum(-y*T.log(layer3)-(1-y)*T.log(1-layer3)) + T.sum(theta1**2) + T.sum(theta3**2) + T.sum(theta3**2)
+\end{lstlisting}
+The intuition behind the cost function is that in the $-\log$ function, the closer to the one you are, the less value you get. So, when we expect one, we do $1*-\log(h_{\theta}(x^{(i)}))$ obtaining less value the closer to cero we are. And, when we expect cero we do$1-0 * -\log(1-h_{\theta}(x^{(i)}))$, this means that when less is the value of the hypotesis, closer to one we are obtaining a less value from the $-\log$ function.
+
+Afther this, to update the $\theta$ we can use one of the update algorithms described in this paper (Section \ref{sec:Gradient} and Section \ref{sec:SGradient}) or another one. Using all this knowledge the applitacion presented in this paper was made.
 \section{Description of the application and its resuslts}
 
 There are three main components to be described in this section. The first one is the architecture and tool used and developed for this application. The second one is the data used to train the model and to test it. And, the last one, is the results obtained while and afteher the training of the Neural Network.
+
 
 \subsection{Architecture and tool}
 
@@ -351,7 +411,7 @@ The activation function for the neurons is the sigmoid function. This function w
 
 For the training we decided to use the stochastic gradient descent algorithm. This algorithm is described in a previous section so to know more about it see the Section \ref{sec:SGradient}.
 
-In the thery, for stochatic gradient descent we have the cost funtion described in its section, but in this case and using the theory of Neural Networks for classification we used the cost function described in the section of Neural Networks.
+In the thery, for stochatic gradient descent we have the cost funtion described in its section, but in this case and using the theory of Neural Networks for classification we used the cost function described in the section of Neural Networks (Section \ref{sec:Neural Networks}).
 
 And, the last detail to be mentioned is that we have a random values for the $\theta$ of the layers at the start of the application. This is noteworthy because one of the greatest advances in Deep Learning is the unsupervised pre-training\cite{erhan2010does,bengio2007greedy}. We decided this random initialization because we consider that the problem is not hard enough and the training examples are not enough to need this.
 
