@@ -92,10 +92,108 @@ Knowing how artificial neurons works, we have to know how this neurons are organ
 Now, the matter is how a Neural Network can abstract the knowledge from the problems. The answer lies in the representation of the problem and, more specifically, in how we tune this model. So, firstly, we, as Deep Learning Engineers, must build a good representation of the problem for being understood by the computer. And lastly, we shloud tune the Neural Network in order to obtain the best results. This can be done by changing the number of layers, the way the layers are interconnected, the activation functions of the neurons, the restrictions of the supervised training, etc... Of course this procces of tunning is not easy, we can't be sure which configuration is going to work best and there is not a way to predict this.
 
 Neural Networks have a lot of applications which the main ones are Character and Image recongnition, Image Compression, Stock Market Prediction and Some medicine applications such as cancer prediction.
-\subsection{Boltzmann Machines and Deep Belief Networks\cite{bengio2009learning}}
 
 \subsection{Unsupervised pretraining for Deep Architectures\cite{erhan2010does,bengio2007greedy}}
+\label{sec:UnPre}
+This section in the State of the Art is more important than It at first sight can seem. This is because, before 2006, Deep Learning was a field with not much progress and where the researchers obtained poor erros in the training and testing of the Deep Architectures, but the Unsupervised pretraining changed that fact and Deep Learning became into a field with a lot of future and applications.
 
+The theory behind this is that, the large neural networks are difficult to train and it requires a large amount of time to get a good result but allway this result is not good enough. So, the main question that was disturbing the researchers was: Why do we get this poor results? The answer roots in the random initialization of the $\theta$ values for the layers and in the shape of the cost function.
+
+The intuition behind this is that the cost function is not a simple one but it is a very coplex function with a really large amount of local minimums and when your algorithm starts to converge, it could be converging in a local minimum instead of converging in the global minimum or, at least, in a better one. In order to help the algorithm to converge faster, it is tipic to do a random inizialitation that situates the algorithm in a random place of the cost function and we could be near to a bad local minimum. So, before year 2006, Deep Learning because in the cost function for this kind of problems we have several local minimums and most of them are not good enough and, with the random initialization, we have a really great percentage to end into a not good enough local minimum. 
+
+The solution was to do an unsupervised pretraining over the layers of the Deep Network to get a coherent initialization values for the $\theta$. But, why this solution works good? what is the meaning behing this unsupervised pretraining? The answer is still uncertain but are some papers that gives some ideas of this. The turth is that this papers give us an unswer to that question but thas answer is an intuition based on severals results obtained after the execute of various Deep algorithms.
+
+The intuition behind this says that this supervised training acts as a regulization parameter that situates the initial state of the algorithm into a better place of the cost function, near a great local minimum. This means that, using a subset of the training examples without their label, the pretraining learns something about the inputs that gives us a better position in the cost function. Also, because we are really near to a good local minimum, we avoid the step to get closer to the local and, in result, we get a really faster convergence and, of course, we obtain a great results at the end.
+
+The algorithms that are tipically used for the pretraining are the ones related to the neighborhood theory. For example the k-nearest algorith or others when you take the knwoledge that are various examples that should be neightbors to learn the values of $\theta$. The result is most than obvious, it is clearly proved that this process helps the algorithms to achieve better results and, also, you get a faster convergence which translates into less training time.
+
+\subsection{Deep Neural Networks}
+To add some extra information in the Neural Networks state of the art, I will use the book of Bengio \cite{bengio2009learning} to present some Neural Networks that are interesting to see. These Neural Networks are commonly used in Deep Architectures because they have particular characteristics that are going to be presented.
+
+\subsubsection{Convolutional Neural Networks}
+As we explainen in Section \ref{sec:UnPre}, the Deep Neural Networks were really difficult to train, but, among all of them, there is one that was the exception, it is the Convonutional Neural Network. The partiularity of this network is that is inspired in the structure of the visual system described and proposed by \cite{hubel1962receptive}.  The first attemps of this network were to apply the neurons with same parameters on patches of the previous layer obtaining a kind of transalational invariance. After that, another improvement to this model was the use of the error gradient obtaining a better performance. Now, for a quick recognition of objects, it is recognized that there is a consintentcy between the way the Convolutional Netorks process and the physiology of the visual system. Nowadays, the systems for pattern recogntinion that are based in Convolutional Neural Networks have the best performance. 
+
+The peculiarity of Convolutional Neural Netowrks is that they have, normally, five or more layers and for the rest of the Deep Networks, the training with this amount of layers without an unsupervised pre-training become almost impossible to be done. Now, the question is Why this model has a better training than the others? The answer roots in the architecture.
+
+The convolutional neural network of LeCun is divided by two types of layers, the first one is the convolutional layer and, the second one, the subsampling layer. All this layer have a topographic structure which means that the neurons have a coordenate associated that represents the area of the image where the neuron is receptive. We have that there are a rectangle patch that contains different numbers of neurons in each layer with the same weights for all of them.
+
+One hypotesis explain the success of Convolutional Neural Networks because the neurons have a small fan-in which helps to the gradient to be propagated in all layers without becoming useless. But this explanation seems not to be good enough because the complexity of deep learning problems can not be performed that good only with the random sparse connectivity. The other hypotesis is based on the hierarchical local connectivity structure which is very strong an this kind of structure seems to be well suited for the vision tasks. Ther is also one interesting fact, a convulotional neural network with random initialization works better than a fully connected neural netowrk trained and worse than a optimized convolutional neural network. This fact seems to explain that convolutional neural networks are simply better suited for this kind of task thank to its structure.
+
+\subsubsection{Boltzmann Machines}
+
+Firstly, before the explanation of Boltzmann Machines, is worth to explain what an energy based model is, because Boltzman Macines are part of them.
+
+The energy based models has set of variables of interest that have associated an energy value. The learning process in this models is done changing this value until it becomes desirable. The energy based models define a probability distribution using an energy function.
+
+\begin{equation}
+  p(x)=\frac{e^{-E(x)}}{Z}
+\end{equation}
+
+The $Z$ in the equation is a normalizing factor called partition function.
+
+\begin{equation}
+  Z=\displaystyle\sum_{x} e^{-E(x)}
+\end{equation}
+
+The learning process in energy based models can be done with stochastic gradient descent (Section \ref{sec:SGradient}), for example, but this has to be done on the empirical negative log likelihood of the training data set. 
+
+Also, there are cases when the $x$ input is not seeing completely but we se a part of $x$ and we have a hidden part $h$, this particular case of energy based model is called Boltzmann Machine. This is done in special cases or when we want to have hidden parts in porpouse to increase the expressive power. Knowing this, the formula is different from the above one.
+\begin{equation}
+  P(x)=\displaystyle\sum_{h} P(x,h)=\displaystyle\sum_{h} \frac{e^{-E(x,h)}}{Z}
+\end{equation}
+Nota that now the sum is not over the $x$ input but over the $h$ hidden part. Now is tipic to introduce the formula of free energy to simplify this function into one easier.
+\begin{equation}
+  F(x)=- \log\displaystyle\sum_{h}{e^{-E(x,h)}}
+\end{equation}
+Then, now we have a new definition of the probability distibution after aplying the formula above to the formula of the probability distribution.
+\begin{equation}
+  P(x)=\frac{e^{-F(x)}}{Z}\quad \textrm{with}\quad Z= \displaystyle\sum_{h}{e^{-F(x)}}
+\end{equation}
+
+The Restricted Boltzmann Machines (RBMs) particularity is the they are more restric than Boltzmann machines having a structure without connections between the layer of the same type (visible-visible connection, hidden-hidden conection).
+
+The energy function for RBMs is differetn from the energy function for BMs.
+\begin{equation}
+  E(u,v)= -b'v-c'v-h'Wv
+\end{equation}
+The $W$ represent the weights and $b'$ and $c'$ represents the offsets of the hidden and visible units. Now, the free energy formula change to:
+\begin{equation}
+  F(v)=-b'v - \displaystyle\sum_{i}\log\displaystyle\sum_{h_{i}}e^{h_{i}(c_{i}+W_{i}v)}
+\end{equation}
+And, nowing that the layers connections are independients we can write the next expression:
+\begin{equation}
+  p(h| v)=\prod_{i}p(h_{i}| v)\quad \textrm{and}\quad p(v| h)=\prod_{j}p(v_{i}|h)
+\end{equation}
+And, finally if we consider the commonly studied case of binary units we obtain another expressions. For the binary units case we have $v_{j},h_{i}\in\{0,1\}$ and the following expressions of the neuron activation function:
+\begin{equation}
+  p(h_{i}=1| v)= sigm(c_{i}+W_{i}v)\quad \textrm{and}\quad p(v_{j}=1| h)=sigm(b_{j}+W'_{j}h)
+\end{equation}
+And, the energy function with the free energy is:
+\begin{equation}
+  F(v)=-b'v - \displaystyle\sum_{i}\log(1+e^{(c_{i}+W_{i}v)})
+\end{equation}
+Finally, is worth to say that sampling in RBMs is useful for learning algorithms because with this we can obtain an estimator of the log-likelihood gradient which is used later to do the training in the update of the weights process.
+
+\subsubsection{Deep Belief Networks}
+Here is a section with a brief description of Deep Belief Networks.
+
+Firstly, we have the architecture, where we have a RBM in the two deepest layers. So we have a neural network with a energy based layer with unsupervised training.
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.2\textwidth]{DBN.png}
+\caption{Deep Belief Netork architecture}
+\label{fig:figure3}
+\end{figure}
+
+Lastly, is worth to metion that the principle of greedy layer-wise unsupervised training\cite{bengio2007greedy} can be applied to the DBNs which we can described in 5 steps:
+\begin{enumerate}
+\item We have to train the first layer as it was a RBM that use the input $x=h^{(0)}$ on the visible layer.
+\item We have now to use the first layer to obtain the input data for the second layer. We can use on of the two representations(mean activations $p(h^{(1)}=1|h^{(0)})$, samples $p(h^{(1)}|h^{(0)})$).
+\item Train te first layer also as a visible layer of an RBM and taking the data from the step before as inputs.
+\item Repeat the steps 2 and 3 until we have trained all of our layers.
+\item Do a fine-tunning to the architecture. This tunning can be done with a normal supervised trainning used in the application of this work (Section \ref{sec:Architecture}) for example.
+\end{enumerate}
+That is the definition of the DBNs architecture. As you can see it is a composition of a RBM and a Multilayer Neural Network.
 \subsection{Other honorable mentions}
 After the presentation of Boltzmann Machines and Neural Networks, I think is interesting to present another three algorithms that are also powerful and could be used to solve complex problems.
 

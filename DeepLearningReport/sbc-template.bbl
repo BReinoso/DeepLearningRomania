@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{heartDiseaseH}
 M.D. Andras~Janosi.
@@ -23,6 +23,12 @@ Dumitru Erhan, Yoshua Bengio, Aaron Courville, Pierre-Antoine Manzagol, Pascal
   Vincent, and Samy Bengio.
 \newblock Why does unsupervised pre-training help deep learning?
 \newblock {\em Journal of Machine Learning Research}, 11(Feb):625--660, 2010.
+
+\bibitem{hubel1962receptive}
+David~H Hubel and Torsten~N Wiesel.
+\newblock Receptive fields, binocular interaction and functional architecture
+  in the cat's visual cortex.
+\newblock {\em The Journal of physiology}, 160(1):106--154, 1962.
 
 \bibitem{Lichman:2013}
 M.~Lichman.
